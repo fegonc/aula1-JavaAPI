@@ -37,7 +37,7 @@ Exemplo de requisição PUT:
 ```json
 {
  "id": 25,
-  "nome": "Lncer",
+  "nome": "Lancer",
   "anoFabricacao": 2023,
   "anoModelo": 2024,
   "modelo": "Sedã",
