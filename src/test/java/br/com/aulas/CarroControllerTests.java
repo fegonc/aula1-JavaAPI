@@ -43,7 +43,6 @@ public class CarroControllerTests {
     public void testAdicionarCarroOk() throws Exception{
         CarroEntity carro = new CarroEntity();
 
-        carro.setIdCor(1L);
         carro.setModelo("Veloster2026");
         carro.setNome("Veloster");
         carro.setAnoFabricacao(2025);
@@ -66,7 +65,6 @@ public class CarroControllerTests {
         CarroEntity carro = new CarroEntity();
 
         carro.setId(5L);
-        carro.setIdCor(1L);
         carro.setModelo("Veloster2026");
         carro.setNome("Veloster");
         carro.setAnoFabricacao(2025);
@@ -88,7 +86,6 @@ public class CarroControllerTests {
     public void testAdicionarCarroSemCampoOnbrigatorio() throws Exception{
         CarroEntity carro = new CarroEntity();
 
-        carro.setIdCor(1L);
         carro.setModelo("Veloster2026");
         //carro.setNome("Veloster");
         carro.setAnoFabricacao(2025);
@@ -109,8 +106,7 @@ public class CarroControllerTests {
     @Test
     public void testAtualizarCarroOk() throws Exception{
         CarroEntity carro = new CarroEntity();
-        carro.setId(13L);
-        carro.setIdCor(1L);
+        carro.setId(24L);
         carro.setModelo("Veloster2026");
         carro.setNome("Saveiro");
         carro.setAnoFabricacao(2026);
@@ -130,7 +126,7 @@ public class CarroControllerTests {
 
     @Test
     public void testApagarCarroOk() throws Exception {
-        Integer id = 7;
+        Integer id = 23;
         mockMvc.perform(
                 MockMvcRequestBuilders.delete("/carros/"+id)
         ).andExpect(

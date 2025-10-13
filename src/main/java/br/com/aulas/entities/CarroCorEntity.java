@@ -1,5 +1,6 @@
 package br.com.aulas.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity(name = "carro_cor")
@@ -12,6 +13,7 @@ public class CarroCorEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_carro", nullable = false)
+    @JsonIgnore
     private CarroEntity carro;
 
     @ManyToOne(fetch = FetchType.EAGER)
