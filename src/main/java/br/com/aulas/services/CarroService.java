@@ -1,6 +1,8 @@
 package br.com.aulas.services;
 
+import br.com.aulas.entities.CarroCorEntity;
 import br.com.aulas.entities.CarroEntity;
+import br.com.aulas.entities.CorEntity;
 import br.com.aulas.repositories.CarroRepository;
 import br.com.aulas.repositories.CorRepository;
 import jakarta.persistence.EntityManager;
@@ -17,6 +19,9 @@ public class CarroService {
     @Autowired
     CarroRepository carroRepository;
 
+    @Autowired
+    private CorRepository corRepository;
+
     @PersistenceContext
     private EntityManager em;
 
@@ -26,15 +31,20 @@ public class CarroService {
 
     @Transactional
     public void salvarOuAlterarCarro(CarroEntity carro){
-        carroRepository.save(carro);
+        for (CarroCorEntity carroCor : carro.getCores()) {
+            carroCor.setCarro(carro);
 
-        if (carro.getIdCor() != null) {
-            em.createNativeQuery("INSERT INTO aulas1.carro_cor (id_carro, id_cor) VALUES (:idCarro, :idCor)")
-                    .setParameter("idCarro", carro.getId())
-                    .setParameter("idCor", carro.getIdCor().getId())
-                    .executeUpdate();
+            // Garantir que o objeto CorEntity existe no banco (busca pelo id)
+            if (carroCor.getCor() != null && carroCor.getCor().getId() != null) {
+                CorEntity cor = corRepository.findById(carroCor.getCor().getId())
+                        .orElseThrow(() -> new RuntimeException("Cor não encontrada"));
+                carroCor.setCor(cor);
+            }
         }
+
+        carroRepository.save(carro); // Cascade.ALL salva tudo (carro + carro_cor)
     }
+
 
     public void apagarCarro(Long id){
         carroRepository.deleteById(id);

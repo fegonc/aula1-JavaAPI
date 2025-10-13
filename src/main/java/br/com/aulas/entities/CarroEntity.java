@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity(name = "carro")
 public class CarroEntity {
 
@@ -29,9 +30,8 @@ public class CarroEntity {
     @JoinColumn(name = "marca_id")
     private MarcaEntity marca;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_cor", referencedColumnName = "idcor")
-    private CorEntity idCor;
+    @OneToMany(mappedBy = "carro", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CarroCorEntity> cores = new ArrayList<>();
 
 
     public Long getId() {
@@ -82,11 +82,8 @@ public class CarroEntity {
         this.marca = marca;
     }
 
-    public CorEntity getIdCor() {
-        return idCor;
-    }
+    public List<CarroCorEntity> getCores() { return cores; }
+    public void setCores(List<CarroCorEntity> cores) { this.cores = cores; }
 
-    public void setIdCor(CorEntity idCor) {
-        this.idCor = idCor;
-    }
 }
+
