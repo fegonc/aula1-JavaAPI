@@ -1,12 +1,14 @@
 package br.com.aulas.entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity(name = "carro")
+@Data
 public class CarroEntity {
 
     @Id
@@ -32,58 +34,6 @@ public class CarroEntity {
 
     @OneToMany(mappedBy = "carro", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CarroCorEntity> cores = new ArrayList<>();
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Integer getAnoFabricacao() {
-        return anoFabricacao;
-    }
-
-    public void setAnoFabricacao(Integer anoFabricacao) {
-        this.anoFabricacao = anoFabricacao;
-    }
-
-    public Integer getAnoModelo() {
-        return anoModelo;
-    }
-
-    public void setAnoModelo(Integer anoModelo) {
-        this.anoModelo = anoModelo;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
-    public MarcaEntity getMarca() {
-        return marca;
-    }
-
-    public void setMarca(MarcaEntity marca) {
-        this.marca = marca;
-    }
-
-    public List<CarroCorEntity> getCores() { return cores; }
-    public void setCores(List<CarroCorEntity> cores) { this.cores = cores; }
 
 }
 

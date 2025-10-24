@@ -2,8 +2,10 @@ package br.com.aulas.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity(name = "carro_cor")
+@Data
 public class CarroCorEntity {
 
     @Id
@@ -20,10 +22,4 @@ public class CarroCorEntity {
     @JoinColumn(name = "id_cor", nullable = false)
     private CorEntity cor;
 
-
-    public Long getId() { return id; }
-    public CarroEntity getCarro() { return carro; }
-    public void setCarro(CarroEntity carro) { this.carro = carro; }
-    public CorEntity getCor() { return cor; }
-    public void setCor(CorEntity cor) { this.cor = cor; }
 }
